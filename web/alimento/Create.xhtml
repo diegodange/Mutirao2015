@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+         xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AlimentoCreateDlg" widgetVar="AlimentoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAlimentoTitle}">
+            <h:form id="AlimentoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{alimentoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAlimentoLabel_idalimento}" for="idalimento" />
+                        <p:inputText id="idalimento" value="#{alimentoController.selected.idalimento}" title="#{bundle.CreateAlimentoTitle_idalimento}" required="true" requiredMessage="#{bundle.CreateAlimentoRequiredMessage_idalimento}"/>
+                        <p:outputLabel value="#{bundle.CreateAlimentoLabel_nomealimento}" for="nomealimento" />
+                        <p:inputText id="nomealimento" value="#{alimentoController.selected.nomealimento}" title="#{bundle.CreateAlimentoTitle_nomealimento}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{alimentoController.create}" value="#{bundle.Save}" update="display,:AlimentoListForm:datalist,:growl" oncomplete="handleSubmit(args,'AlimentoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AlimentoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

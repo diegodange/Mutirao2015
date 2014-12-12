@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+      
+    
+    <ui:composition>
+
+        <p:dialog  id="DoacaoCreateDlg" widgetVar="DoacaoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDoacaoTitle}">
+            <h:form id="DoacaoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{doacaoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDoacaoLabel_codigoDoacao}" for="codigoDoacao" />
+                        <p:inputText id="codigoDoacao" value="#{doacaoController.selected.codigoDoacao}" title="#{bundle.CreateDoacaoTitle_codigoDoacao}" required="true" requiredMessage="#{bundle.CreateDoacaoRequiredMessage_codigoDoacao}"/>
+                        <p:outputLabel value="#{bundle.CreateDoacaoLabel_doadorCpf}" for="doadorCpf" />
+                        <p:selectOneMenu id="doadorCpf" value="#{doacaoController.selected.doadorCpf}" required="true" requiredMessage="#{bundle.EditDoacaoRequiredMessage_doadorCpf}">
+                            <f:selectItems value="#{doadorController.itemsAvailableSelectOne}"
+                                           var="doadorCpfItem"
+                                           itemValue="#{doadorCpfItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDoacaoLabel_alimentoHasPesoCodAlimento}" for="alimentoHasPesoCodAlimento" />
+                        <p:selectOneMenu id="alimentoHasPesoCodAlimento" value="#{doacaoController.selected.alimentoHasPesoCodAlimento}" required="true" requiredMessage="#{bundle.EditDoacaoRequiredMessage_alimentoHasPesoCodAlimento}">
+                            <f:selectItems value="#{alimentoPesoController.itemsAvailableSelectOne}"
+                                           var="alimentoHasPesoCodAlimentoItem"
+                                           itemValue="#{alimentoHasPesoCodAlimentoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDoacaoLabel_quantidade}" for="quantidade" />
+                        <p:inputText id="quantidade" value="#{doacaoController.selected.quantidade}" title="#{bundle.CreateDoacaoTitle_quantidade}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{doacaoController.create}" value="#{bundle.Save}" update="display,:DoacaoListForm:datalist,:growl" oncomplete="handleSubmit(args,'DoacaoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DoacaoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

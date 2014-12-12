@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DoadorCreateDlg" widgetVar="DoadorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDoadorTitle}">
+            <h:form id="DoadorCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{doadorController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDoadorLabel_cpf}" for="cpf" />
+                        <p:inputText id="cpf" value="#{doadorController.selected.cpf}" title="#{bundle.CreateDoadorTitle_cpf}" required="true" requiredMessage="#{bundle.CreateDoadorRequiredMessage_cpf}"/>
+                        <p:outputLabel value="#{bundle.CreateDoadorLabel_bairro}" for="bairro" />
+                        <p:inputText id="bairro" value="#{doadorController.selected.bairro}" title="#{bundle.CreateDoadorTitle_bairro}" />
+                        <p:outputLabel value="#{bundle.CreateDoadorLabel_nome}" for="nome" />
+                        <p:inputText id="nome" value="#{doadorController.selected.nome}" title="#{bundle.CreateDoadorTitle_nome}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{doadorController.create}" value="#{bundle.Save}" update="display,:DoadorListForm:datalist,:growl" oncomplete="handleSubmit(args,'DoadorCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DoadorCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

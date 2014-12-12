@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DoacaoViewDlg" widgetVar="DoacaoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDoacaoTitle}">
+            <h:form id="DoacaoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{doacaoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDoacaoLabel_codigoDoacao}"/>
+                        <h:outputText value="#{doacaoController.selected.codigoDoacao}" title="#{bundle.ViewDoacaoTitle_codigoDoacao}"/>
+                        <h:outputText value="#{bundle.ViewDoacaoLabel_doadorCpf}"/>
+                        <h:outputText value="#{doacaoController.selected.doadorCpf}" title="#{bundle.ViewDoacaoTitle_doadorCpf}"/>
+                        <h:outputText value="#{bundle.ViewDoacaoLabel_alimentoHasPesoCodAlimento}"/>
+                        <h:outputText value="#{doacaoController.selected.alimentoHasPesoCodAlimento}" title="#{bundle.ViewDoacaoTitle_alimentoHasPesoCodAlimento}"/>
+                        <h:outputText value="#{bundle.ViewDoacaoLabel_quantidade}"/>
+                        <h:outputText value="#{doacaoController.selected.quantidade}" title="#{bundle.ViewDoacaoTitle_quantidade}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DoacaoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
